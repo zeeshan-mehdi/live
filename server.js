@@ -25,6 +25,8 @@ io.sockets.on("connection", socket => {
     console.log('connected');
   });
 
+  socket.broadcast.emit('success','success');
+
 
   socket.on("broadcaster", () => {
     broadcaster = socket.id;
