@@ -44,7 +44,7 @@ socket.on("candidate", (id, candidate) => {
 
 socket.on("connect", () => {
   console.log('connect watch.js');
-  socket.emit("watcher");
+  socket.broadcast.emit("watcher");
 });
 
 // socket.on("connection", () => {
@@ -54,7 +54,7 @@ socket.on("connect", () => {
 
 socket.on("broadcaster", () => {
   console.log('broadcaster watch.js');
-  socket.emit("watcher");
+  socket.broadcast.emit("watcher");
 });
 
 socket.on("disconnectPeer", () => {

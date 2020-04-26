@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 let broadcaster;
-const port = process.env.PORT||4000;
+const port = process.env.PORT||3000;
 
 const http = require("http");
 const server = http.createServer(app);
@@ -10,12 +10,12 @@ const server = http.createServer(app);
 const io = require("socket.io")(server);
 app.use(express.static(__dirname + "/public"));
 
-io.on('connection', function (socket) {
-  console.log(socket.id, 'joined');
-  socket.on('/test', function (msg) {
-      io.emit('connect');
-  });
-});
+// io.on('connection', function (socket) {
+//   console.log(socket.id, 'joined');
+//   socket.on('send_message', function (msg) {
+//       io.broadcast.emit('receive_message',msg);
+//   });
+// });
 
 io.sockets.on("error", e => console.log(e));
 io.sockets.on("connection", socket => {
