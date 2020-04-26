@@ -11,6 +11,10 @@ const socket = io.connect(window.location.origin);
 const video = document.querySelector("video");
 
 socket.on("offer", (id, description) => {
+  console.log('offer watch.js ');
+  console.log(id);
+  console.log(description);
+  
   peerConnection = new RTCPeerConnection(config);
   peerConnection
     .setRemoteDescription(description)
@@ -30,16 +34,21 @@ socket.on("offer", (id, description) => {
 });
 
 socket.on("candidate", (id, candidate) => {
+  console.log('candidate watch.js');
+  console.log(id);
+  console.log(candidate);
   peerConnection
     .addIceCandidate(new RTCIceCandidate(candidate))
     .catch(e => console.error(e));
 });
 
 socket.on("connect", () => {
+  console.log('connect watch.js');
   socket.emit("watcher");
 });
 
 socket.on("broadcaster", () => {
+  console.log('broadcaster watch.js');
   socket.emit("watcher");
 });
 

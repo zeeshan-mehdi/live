@@ -7,15 +7,22 @@ const config = {
   ]
 };
 
+console.log(window.location.origin);
+
 const socket = io.connect(window.location.origin);
 
 socket.on("answer", (id, description) => {
+  console.log('inside answer broadcast.js ');
+  console.log(id);
+  console.log(description);
   peerConnections[id].setRemoteDescription(description);
 });
 
 socket.on("watcher", id => {
   const peerConnection = new RTCPeerConnection(config);
   peerConnections[id] = peerConnection;
+  console.log('watcher broadcast.js ');
+  console.log(id);
 
   let stream = videoElement.srcObject;
   stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
@@ -35,10 +42,12 @@ socket.on("watcher", id => {
 });
 
 socket.on("candidate", (id, candidate) => {
+  console.log('candidate broadcast.js ');
   peerConnections[id].addIceCandidate(new RTCIceCandidate(candidate));
 });
 
 socket.on("disconnectPeer", id => {
+  console.log('disconnet broadcast.js ');
   peerConnections[id].close();
   delete peerConnections[id];
 });
