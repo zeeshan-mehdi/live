@@ -47,6 +47,11 @@ socket.on("connect", () => {
   socket.emit("watcher");
 });
 
+socket.on("connection", () => {
+  console.log('connection watch.js');
+  socket.emit("watcher");
+});
+
 socket.on("broadcaster", () => {
   console.log('broadcaster watch.js');
   socket.emit("watcher");
