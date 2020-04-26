@@ -10,9 +10,22 @@ const server = http.createServer(app);
 const io = require("socket.io")(server);
 app.use(express.static(__dirname + "/public"));
 
+io.on('connection', function (socket) {
+  console.log(socket.id, 'joined');
+  socket.on('/test', function (msg) {
+      io.emit('connect');
+  });
+});
+
 io.sockets.on("error", e => console.log(e));
 io.sockets.on("connection", socket => {
   console.log('connected');
+
+  socket.on('connect',()=>{
+    console.log('connected');
+  });
+
+
   socket.on("broadcaster", () => {
     broadcaster = socket.id;
     socket.broadcast.emit("broadcaster");
