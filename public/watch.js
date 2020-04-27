@@ -28,12 +28,18 @@ socket.on("offer", (id, description) => {
   };
   peerConnection.onicecandidate = event => {
     if (event.candidate) {
-      socket.emit("candidate", id, event.candidate);
+      var obj = {
+        'id':id,
+        'candidate':JSON.stringify(event.candidate)
+      }
+      socket.emit("candidate", obj);
     }
   };
 });
 
-socket.on("candidate", (id, candidate) => {
+socket.on("candidate", (data) => {
+  let id = data['id'];
+  let candidate = data['candidate'];
   console.log('candidate watch.js');
   console.log(id);
   console.log(candidate);

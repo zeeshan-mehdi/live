@@ -47,7 +47,11 @@ io.sockets.on("connection", socket => {
   });
   socket.on("candidate", ( data) => {
     let message = data['candidate'];
-    socket.broadcast.emit("candidate", socket.id, message);
+    obj = {
+      'id':socket.id,
+      'candidate':message
+    }
+    socket.broadcast.emit("candidate", obj);
   });
   socket.on("disconnect", () => {
     socket.broadcast.emit("disconnectPeer", socket.id);
