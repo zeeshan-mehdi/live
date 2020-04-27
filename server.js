@@ -55,7 +55,7 @@ io.sockets.on("connection", socket => {
       'id':socket.id,
       'candidate':message
     }
-    socket.to(data['id']).emit("candidate", obj);
+    socket.to(socket.id).emit("candidate", obj);
   });
   socket.on("disconnect", () => {
     socket.to(broadcaster).emit("disconnectPeer", socket.id);
