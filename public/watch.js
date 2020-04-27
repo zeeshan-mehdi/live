@@ -8,8 +8,7 @@ const config = {
 };
 
 const socket = io.connect(window.location.origin);
-const video = document.querySelector(".stream");
-const remoteVideo = document.querySelector(".remote");
+const video = document.querySelector("video");
 
 socket.on("offer", (id, description) => {
   console.log('offer watch.js ');
@@ -41,8 +40,6 @@ socket.on("offer", (id, description) => {
     console.log('track added ');
     console.log(stream);
     video.srcObject = stream;
-    remoteVideo.srcObject = stream;
-    remoteVideo.play();
     
   };
   peerConnection.onicecandidate = event => {
