@@ -27,19 +27,24 @@ socket.on("offer", (id, description) => {
     video.srcObject = event.streams[0];
   };
   peerConnection.onicecandidate = event => {
+
     if (event.candidate) {
       var obj = {
         'id':id,
-        'candidate':JSON.stringify(event.candidate)
+        'candidate':{
+          'sdpMLineIndex': event.candidate.sdpMlineIndex,
+          'sdpMid': event.candidate.sdpMid,
+          'candidate': event.candidate.candidate,
+        }
       }
       socket.emit("candidate", obj);
-    }
+    }   
   };
 });
 
 socket.on("candidate", (data) => {
   let id = data['id'];
-  let candidate = JSON.parse(data['candidate']);
+  let candidate = data['candidate'];
   console.log('candidate watch.js');
   console.log(id);
   console.log(candidate);
