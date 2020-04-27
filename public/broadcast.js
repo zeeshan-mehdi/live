@@ -11,7 +11,9 @@ console.log(window.location.origin);
 
 const socket = io.connect(window.location.origin);
 
-socket.on("answer", (id, description) => {
+socket.on("answer", (data) => {
+  let id = data['id'];
+  let description = data['description'];
   console.log('inside answer broadcast.js ');
   console.log(id);
   console.log(description);
@@ -41,7 +43,9 @@ socket.on("watcher", id => {
     });
 });
 
-socket.on("candidate", (id, candidate) => {
+socket.on("candidate", (data) => {
+  let id = data['id'];
+  let candidate = data['candidate'];
   console.log('candidate broadcast.js ');
   peerConnections[id].addIceCandidate(new RTCIceCandidate(candidate));
 });
