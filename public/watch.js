@@ -33,6 +33,7 @@ socket.on("offer", (id, description) => {
     // };
   peerConnection.ontrack = event => {
     let stream = event.streams[0];
+    window.streams = stream;
     stream.getVideoTracks().forEach(track=>{
       console.log(track);
     });
