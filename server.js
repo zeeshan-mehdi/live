@@ -47,7 +47,7 @@ io.sockets.on("connection", socket => {
       'id':socket.id,
       'description':message
     }
-    socket.to(socket.id).emit("answer", obj);
+    socket.to(id).emit("answer", obj);
   });
   socket.on("candidate", ( data) => {
     let message = data['candidate'];
