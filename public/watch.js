@@ -69,7 +69,11 @@ socket.on("broadcaster", () => {
 });
 
 socket.on("disconnectPeer", () => {
+  try{
   peerConnection.close();
+  }catch(e){
+    console.log(e);
+  }
 });
 
 window.onunload = window.onbeforeunload = () => {
