@@ -15,6 +15,9 @@ socket.on("offer", (id, description) => {
   console.log(id);
   console.log(description);
   
+
+  description = JSON.parse(description);
+
   peerConnection = new RTCPeerConnection(config);
   peerConnection
     .setRemoteDescription(description)
