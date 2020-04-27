@@ -39,7 +39,11 @@ socket.on("watcher", id => {
     .createOffer()
     .then(sdp => peerConnection.setLocalDescription(sdp))
     .then(() => {
-      socket.emit("offer", id, peerConnection.localDescription);
+      var obj = {
+        'id':id,
+        'localDescription':peerConnection.localDescription
+      }
+      socket.emit("offer", obj);
     });
 });
 
