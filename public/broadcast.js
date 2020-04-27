@@ -51,9 +51,11 @@ socket.on("candidate", (data) => {
 });
 
 socket.on("disconnectPeer", id => {
+  try{
   console.log('disconnet broadcast.js ');
   peerConnections[id].close();
   delete peerConnections[id];
+  }catch(e){print(e);}
 });
 
 window.onunload = window.onbeforeunload = () => {
