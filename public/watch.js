@@ -23,7 +23,10 @@ socket.on("offer", (id, description) => {
     .then(() => {
       socket.emit("answer", id, peerConnection.localDescription);
     });
+
   peerConnection.ontrack = event => {
+    console.log('track added ');
+    console.log(event.streams[0]);
     video.srcObject = event.streams[0];
   };
   peerConnection.onicecandidate = event => {
