@@ -39,11 +39,15 @@ io.sockets.on("connection", socket => {
   socket.on("offer", (data) => {
     let id = data['id'];
     let message = data['localDescription'];
-    socket.broadcast.emit("offer", socket.id, message);
+    socket.to(id).emit("offer", socket.id, message);
   });
   socket.on("answer", (id, message) => {
     //socket.to(id).emit("answer", socket.id, message);
-    socket.broadcast.emit("answer", socket.id, message);
+    var obj = {
+      'id':socket.id,
+      'description':message
+    }
+    socket.broadcast.emit("answer", obj);
   });
   socket.on("candidate", ( data) => {
     let message = data['candidate'];
