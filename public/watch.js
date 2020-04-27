@@ -39,7 +39,7 @@ socket.on("offer", (id, description) => {
 
 socket.on("candidate", (data) => {
   let id = data['id'];
-  let candidate = data['candidate'];
+  let candidate = JSON.parse(data['candidate']);
   console.log('candidate watch.js');
   console.log(id);
   console.log(candidate);
