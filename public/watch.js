@@ -26,15 +26,19 @@ socket.on("offer", (id, description) => {
       socket.emit("answer", id, peerConnection.localDescription);
     });
 
-    peerConnection.onaddstream = event => {
-      console.log('stream added ');
-      console.log(event.stream);
-      video.srcObject = event.stream;
-    };
+    // peerConnection.onaddstream = event => {
+    //   console.log('stream added ');
+    //   console.log(event.stream);
+    //   video.srcObject = event.stream;
+    // };
   peerConnection.ontrack = event => {
+    let stream = event.streams[0];
+    stream.getVideoTracks().forEach(track=>{
+      console.log(track);
+    });
     console.log('track added ');
-    console.log(event.streams[0]);
-    video.srcObject = event.streams[0];
+    console.log(stream);
+    video.srcObject = stream;
   };
   peerConnection.onicecandidate = event => {
 
