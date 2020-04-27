@@ -45,7 +45,8 @@ io.sockets.on("connection", socket => {
     //socket.to(id).emit("answer", socket.id, message);
     socket.broadcast.emit("answer", socket.id, message);
   });
-  socket.on("candidate", (id, message) => {
+  socket.on("candidate", ( data) => {
+    let message = data['candidate'];
     socket.broadcast.emit("candidate", socket.id, message);
   });
   socket.on("disconnect", () => {
