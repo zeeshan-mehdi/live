@@ -55,7 +55,7 @@ socket.on("disconnectPeer", id => {
   console.log('disconnet broadcast.js ');
   peerConnections[id].close();
   delete peerConnections[id];
-  }catch(e){print(e);}
+  }catch(e){console.log(e);}
 });
 
 window.onunload = window.onbeforeunload = () => {
