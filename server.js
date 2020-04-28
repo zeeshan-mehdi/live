@@ -20,21 +20,13 @@ app.use(express.static(__dirname + "/public"));
 io.sockets.on("error", e => console.log(e));
 io.sockets.on("connection", socket => {
   console.log('connected');
-
-  socket.on('connect',()=>{
-    console.log('connected');
-  });
-
-  socket.broadcast.emit('success','success');
-
-
   socket.on("broadcaster", () => {
     broadcaster = socket.id;
     socket.broadcast.emit("broadcaster");
   });
   socket.on("watcher", () => {
     //socket.to(broadcaster).emit("watcher", socket.id);
-    socket.broadcast.emit("watcher", socket.id);
+    socket.to(broadcaster).emit("watcher", socket.id);
   });
   socket.on("offer", (data) => {
     let id = data['id'];
