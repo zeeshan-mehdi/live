@@ -18,7 +18,7 @@ app.use(express.static(__dirname + "/public"));
 // });
 
 io.sockets.on("error", e => console.log(e));
-io.sockets.on("connection", socket => {
+io.sockets.on("connect", socket => {
   console.log('connected');
   socket.on("broadcaster", () => {
     broadcaster = socket.id;
